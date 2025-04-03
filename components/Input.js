@@ -1,11 +1,11 @@
 import { StyleSheet, Text, TextInput, View } from 'react-native'
 import React from 'react'
 
-export default function Input({label, keyboardType, onUpdateValue, value, secure}) {
+export default function Input({label, keyboardType, onUpdateValue, value, secure, isInvalid}) {
   return (
     <View>
       <TextInput 
-        style={styles.input}
+        style={[styles.input, isInvalid && styles.inputInvalid]}
         autoCapitalize='none'
         keyboardType={keyboardType}
         onChangeText={onUpdateValue}
@@ -27,5 +27,9 @@ const styles = StyleSheet.create({
     marginBottom:12,
     borderWidth:0.3,
     borderColor:"#DCDCDC"
+  },
+  inputInvalid: {
+    borderColor: "red",
+    borderWidth: 0.4
   }
 })

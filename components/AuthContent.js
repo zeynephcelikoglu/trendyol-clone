@@ -1,59 +1,88 @@
-import { StyleSheet, Text, View, Pressable, Dimensions, Image } from 'react-native';
+import { StyleSheet, Text, View, Pressable, Dimensions, Image, Alert } from 'react-native';
 import AuthForm from '../components/AuthForm';
-import React from 'react';
+import React, {useState} from 'react';
 import SocialButton from '../components/SocialButton';
+import BottomLink from './BottomLink';
+import { useNavigation } from '@react-navigation/native';
 
 const { height } = Dimensions.get('window'); 
 
 export default function AuthContent({ isLogin }) {
+  const navigation = useNavigation();
+
+  const [credentialsInvalid, setCredentialsInvalid] = useState({
+    email: false,
+    password: false,
+    confirmEmail: false,
+    confirmPassword: false
+  })
+
+  function submitHandler(credentials) {
+    console.log(credentials);
+    let {email, password, confirmEmail, confirmPassword } = credentials
+
+    email = email.trim()
+    password = password.trim()
+    confirmEmail = confirmEmail.trim();
+    confirmPassword = confirmPassword.trim();
+
+    const emailIsValid = email.includes("@")
+    const passwordIsValid = password.length > 6
+    const emailsAreEqual = email === confirmEmail
+    const passwordsAreEqual = password === confirmPassword
+
+    if (!emailIsValid || !passwordIsValid || (!isLogin && (!emailsAreEqual || !passwordsAreEqual))) {
+      Alert.alert("Hata!", "Lütfen girdiğiniz değerleri kontrol ediniz")
+      setCredentialsInvalid({
+        email: !emailIsValid,
+        confirmEmail: !emailIsValid || !emailsAreEqual,
+        password: !passwordIsValid,
+        confirmPassword: !passwordIsValid || !passwordsAreEqual
+      })
+      return
+    }
+  }
+
+  function switchScreen() {
+    if (isLogin) {
+      navigation.navigate("Signup");
+    } else {
+      navigation.navigate("Login");
+    }
+  }
+
   return (
     <View style={styles.container}>
-
-    <View style={styles.header}>
-      <Image source={require('../assets/logo.png')} style={styles.logo} />
-    </View>
+      <View style={styles.header}>
+        <Image source={require('../assets/logo.png')} style={styles.logo} />
+      </View>
 
       <View style={styles.formContainer}>
-        <AuthForm isLogin={isLogin} />
+        <AuthForm credentialsInvalid={credentialsInvalid} isLogin={isLogin} onsubmit={submitHandler} />
 
         <Text style={styles.altText}>Diğer Giriş Seçenekleri</Text>
 
         <View style={styles.socialButtonsRow}>
-          <SocialButton
-            icon="apple"
-            text="Apple ile Giriş Yap"
-            backgroundColor="black"
-            textColor="white"
-            iconColor="white"
-            fullWidth
-          />
-          <SocialButton
-            icon="google"
-            iconColor="#DB4437"
-            backgroundColor="white"
-          />
-          <SocialButton
-            icon="facebook"
-            iconColor="#1877F2"
-            backgroundColor="white"
-          />
+          <SocialButton icon="apple" text="Apple ile bağlan" backgroundColor="black" textColor="white" iconColor="white" fullWidth />
+          <SocialButton icon="google" iconColor="#DB4437" backgroundColor="white" />
+          <SocialButton icon="facebook" iconColor="#1877F2" backgroundColor="white" />
         </View>
 
-        <View style={styles.bottomTextContainer}>
-          <Text>Üye değil misin? </Text>
-          <Pressable>
-            <Text style={styles.linkText}>Üye Ol</Text>
-          </Pressable>
-        </View>
+        <BottomLink
+          text={isLogin ? "Üye değil misin?" : "Zaten hesabın var mı?"}
+          linkText={isLogin ? "Üye Ol" : "Giriş Yap"}
+          onPress={switchScreen}
+        />
+
       </View>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f2741f',
+    backgroundColor: 'white',
   },
   header: {
     height: '50%',
@@ -62,14 +91,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   logo: {
-    width: 200,
-    height: 60,
+    width: 250,
+    height: 80,
     resizeMode: 'contain',
-    marginBottom: 150
+    marginTop: 18,
   },
   formContainer: {
     position: 'absolute',
-    top: height * 0.25,
+    top: height * 0.40,
     left: '5%',
     right: '5%',
     backgroundColor: 'white',
@@ -84,7 +113,7 @@ const styles = StyleSheet.create({
   altText: {
     textAlign: 'center',
     marginVertical: 6,
-    color: '#666',
+    color: '#4d4d4d', 
   },
   socialButtonsRow: {
     flexDirection: 'row',
@@ -92,14 +121,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 10,
     marginTop: 12,
-  },
-  bottomTextContainer: {
-    marginTop: 20,
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  linkText: {
-    color: '#f2741f',
-    fontWeight: 'bold',
-  },
+  }
 });
+
