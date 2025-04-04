@@ -5,7 +5,6 @@ import LoginScreen from './screens/LoginScreen';
 import SignupScreen from './screens/SignupScreen';
 import HomeScreen from './screens/HomeScreen';
 import { useContext } from 'react';
-import AuthContent from './components/AuthContent';
 import { AuthContext } from './store/auth-context';
 import AuthContextProvider from './store/auth-context';
 
@@ -20,7 +19,16 @@ function NormalStack() {
   )
 }
 
-export default function App() {
+function AfterAuthenticatedStack() {
+  return (
+    <Stack.Navigator >
+    <Stack.Screen name="Home" component={HomeScreen} />
+  </Stack.Navigator>
+  )
+}
+
+function Navigation() {
+  const authContext=useContext(AuthContext)
   return (
     <NavigationContainer>
       {!authContext.isAuthenticated && <NormalStack/>}
@@ -37,11 +45,4 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const styles = StyleSheet.create({});
