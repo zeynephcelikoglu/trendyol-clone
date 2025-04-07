@@ -1,12 +1,15 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React from 'react';
+import { View, StyleSheet, ScrollView } from 'react-native';
+import SearchBar from '../components/SearchBar';
+import SpecialOffers from '../components/SpecialOffers';
 
-export default function HomeScreen() {
+export default function HomePage() {
   return (
-    <View>
-      <Text>HomeScreen</Text>
-    </View>
-  )
+    <ScrollView>
+      <SearchBar />
+      <SpecialOffers />
+    </ScrollView>
+  );
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});
