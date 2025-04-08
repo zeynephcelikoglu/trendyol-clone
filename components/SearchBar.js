@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function SearchBar() {
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView edges={['top', 'left', 'right']} >
       <View style={styles.container}>
         <View style={styles.searchInputContainer}>
           <Ionicons name="search" size={20} color="#f2741f" style={styles.searchIcon} />
@@ -30,17 +30,14 @@ export default function SearchBar() {
 }
 
 const styles = StyleSheet.create({
-    safeArea: {
-      backgroundColor: '#fff',
-    },
-    container: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      paddingHorizontal: 12,
-      paddingTop: 8,
-      //paddingVertical: 8,
-    },
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 12,
+    paddingTop: 4, // Eskisi 8 idi. Daha az yaptık.
+    paddingBottom: 4, // Ekledik, aşağıya boşluk vermesin diye
+  },
     searchInputContainer: {
       flexDirection: 'row',
       alignItems: 'center',
