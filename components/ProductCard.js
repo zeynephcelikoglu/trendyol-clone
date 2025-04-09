@@ -1,13 +1,24 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useRoute } from '@react-navigation/native';
 
-export default function ProductCard({ product, onPress }) {
+export default function ProductCard({ product, onPress, size = "small" }) {
+  const route = useRoute();
+  const isLarge = size === "large";
+
   return (
-    <TouchableOpacity style={styles.card} onPress={onPress}>
-      <Image source={{ uri: product.image }} style={styles.image} />
-      
-      <Text numberOfLines={2} style={styles.title}>{product.title}</Text>
+    <TouchableOpacity
+      style={[styles.card, isLarge && styles.largeCard]}
+      onPress={onPress}
+    >
+      <Image
+        source={{ uri: product.image }}
+        style={[styles.image, isLarge && styles.largeImage]}
+      />
+      <Text numberOfLines={2} style={[styles.title, isLarge && styles.largeTitle]}>
+        {product.title}
+      </Text>
 
       <View style={styles.priceRow}>
         <Text style={styles.price}>{product.price} TL</Text>
@@ -19,8 +30,10 @@ export default function ProductCard({ product, onPress }) {
         <Text style={styles.reviewText}>({product.rating?.count || '120'})</Text>
       </View>
     </TouchableOpacity>
+
   );
 }
+
 
 const styles = StyleSheet.create({
   card: {
@@ -31,9 +44,7 @@ const styles = StyleSheet.create({
     marginRight: 12,
     borderWidth: 1,
     borderColor: '#eee', 
-    
   },
-  
   image: {
     width: '100%',
     height: 120,
@@ -67,6 +78,18 @@ const styles = StyleSheet.create({
     marginLeft: 4,
     color: '#666',
   },
+  largeCard: {
+    width: '48%',
+    marginRight: 0,
+  },
+  largeImage: {
+    height: 180, 
+  },
+  largeTitle: {
+    fontSize: 16,
+    height: 50,
+  },
+  
 });
 
 
