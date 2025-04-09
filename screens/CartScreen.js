@@ -4,12 +4,12 @@ import { View, Text, Image, FlatList, StyleSheet, TouchableOpacity } from 'react
 import { useRoute } from '@react-navigation/native';
 import { useContext } from 'react';
 import { CartContext } from '../store/CartContext';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function CartScreen() {
   const route = useRoute();
 
-  const { cartItems } = useContext(CartContext);
-
+  const { cartItems, removeFromCart } = useContext(CartContext);
   const totalPrice = cartItems.reduce((sum, item) => sum + item.price, 0);
 
   return (
@@ -29,6 +29,11 @@ export default function CartScreen() {
               <Text style={styles.delivery}>Tahmini Kargo: 2-5 gün</Text>
               <Text style={styles.price}>{item.price.toFixed(2)} TL</Text>
             </View>
+
+            <TouchableOpacity onPress={() => removeFromCart(item.id)} style={styles.deleteBtn}>
+              <Ionicons name="trash-outline" size={20} color="#f2741f" />
+            </TouchableOpacity>
+
           </View>
         )}
       />
@@ -129,4 +134,3 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
 });
-
