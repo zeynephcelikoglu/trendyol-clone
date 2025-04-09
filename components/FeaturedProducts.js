@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, ActivityIndicator, StyleSheet } from 'react-native';
-import ProductCard from './ProductCard'; // import ettiğine emin ol
+import { View, Text, FlatList, ActivityIndicator, StyleSheet, TouchableOpacity } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import ProductCard from './ProductCard';
 import { useNavigation } from '@react-navigation/native';
 
 export default function FeaturedProducts() {
@@ -17,7 +18,7 @@ export default function FeaturedProducts() {
       })
       .catch(err => {
         console.error("Ürünleri çekerken hata:", err);
-        setLoading(false); 
+        setLoading(false);
       });
   }, []);
 
@@ -31,7 +32,13 @@ export default function FeaturedProducts() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Öne Çıkan Ürünler</Text>
+      <View style={styles.headerRow}>
+        <Text style={styles.title}>Öne Çıkan Ürünler</Text>
+        <TouchableOpacity onPress={() => navigation.navigate('ProductList')}>
+          <Ionicons name="chevron-forward" size={24} color="#f2741f" />
+        </TouchableOpacity>
+      </View>
+
       <FlatList
         horizontal
         data={products}
@@ -40,9 +47,7 @@ export default function FeaturedProducts() {
         renderItem={({ item }) => (
           <ProductCard
             product={item}
-            onPress={() =>
-              navigation.navigate('ProductDetail', { productId: item.id })
-            }
+            onPress={() => navigation.navigate('ProductDetail', { productId: item.id })}
           />
         )}
       />
@@ -53,16 +58,20 @@ export default function FeaturedProducts() {
 const styles = StyleSheet.create({
   container: {
     marginTop: 4,
-    paddingHorizontal: 16,
+    paddingHorizontal: 16, 
+  },
+  headerRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between', 
+    alignItems: 'center',
+    marginBottom: 8,
   },
   title: {
     fontSize: 25,
     fontWeight: '600',
-    marginBottom: 8,
   },
   loader: {
     marginVertical: 30,
     alignItems: 'center',
   },
 });
-
