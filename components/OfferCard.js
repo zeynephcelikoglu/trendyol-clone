@@ -4,7 +4,6 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 export default function OfferCard({ offer }) {
   return (
     <View style={[styles.card, { backgroundColor: offer.backgroundColor }]}>
-      {/* Üst Badge */}
       <View style={styles.badge}>
         <Text style={styles.badgeText}>{offer.badgeText}</Text>
       </View>
@@ -13,8 +12,7 @@ export default function OfferCard({ offer }) {
         <View style={styles.textContainer}>
           <Text style={styles.title}>{offer.title}</Text>
           <Text style={styles.description}>{offer.description}</Text>
-          
-          {/* Fiyat Bilgisi */}
+
           <View style={styles.priceContainer}>
             <Text style={styles.discountText}>%{offer.discount}</Text>
             <Text style={styles.originalPrice}>{offer.originalPrice.toFixed(2)} TL</Text>
@@ -25,7 +23,6 @@ export default function OfferCard({ offer }) {
           </TouchableOpacity>
         </View>
         
-        {/* Optimize Edilmiş Resim */}
         <Image
           source={{ uri: offer.imageUrl }}
           style={styles.image}
@@ -34,7 +31,6 @@ export default function OfferCard({ offer }) {
         />
       </View>
       
-      {/* Zaman Sayacı */}
       <View style={styles.timerContainer}>
         <Text style={styles.timerText}>Son {offer.timer}</Text>
       </View>
@@ -72,7 +68,7 @@ const styles = StyleSheet.create({
   priceContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 12 // 👈 Yazıyla buton arasını aç
+    marginBottom: 12 
   },
   discountText: {
     fontSize: 22,
@@ -89,7 +85,7 @@ const styles = StyleSheet.create({
     textDecorationLine: 'line-through'
   },
   button: {
-    marginTop: 4, // 👈 Biraz aşağı insin
+    marginTop: 4, 
     backgroundColor: '#000',
     paddingHorizontal: 20,
     paddingVertical: 10,
@@ -131,7 +127,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     paddingHorizontal: 8,
     paddingVertical: 4,
-    zIndex: 2  // Öne gelsin
+    zIndex: 2 
   },
   timerText: {
     color: '#FFF',

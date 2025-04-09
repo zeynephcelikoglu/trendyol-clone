@@ -7,6 +7,10 @@ import HomeScreen from './screens/HomeScreen';
 import { useContext } from 'react';
 import { AuthContext } from './store/auth-context';
 import AuthContextProvider from './store/auth-context';
+import ProductListScreen from './screens/ProductListScreen';
+import ProductDetailScreen from './screens/ProductDetailScreen';
+import CartScreen from './screens/CartScreen';
+import CartContextProvider from './store/CartContext';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,6 +27,9 @@ function AfterAuthenticatedStack() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }} >
     <Stack.Screen name="Home" component={HomeScreen} />
+    <Stack.Screen name="ProductList" component={ProductListScreen} />
+    <Stack.Screen name="ProductDetail" component={ProductDetailScreen} />
+    <Stack.Screen name="Cart" component={CartScreen} />
   </Stack.Navigator>
   )
 }
@@ -40,7 +47,9 @@ function Navigation() {
 export default function App() {
   return (
     <AuthContextProvider>
+      <CartContextProvider>
       <Navigation/>
+      </CartContextProvider>
     </AuthContextProvider>
   );
 }
