@@ -19,7 +19,7 @@ export default function BottomBar({ activeTab, setActiveTab }) {
           onPress={() => setActiveTab(tab.id)}
         >
           <Ionicons
-            name={activeTab === tab.id ? tab.icon : `${tab.icon}-outline`}
+            name={tab.icon}
             size={24}
             color={activeTab === tab.id ? '#f2741f' : '#888'}
           />
