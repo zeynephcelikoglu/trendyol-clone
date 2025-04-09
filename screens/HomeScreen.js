@@ -20,7 +20,7 @@ export default function HomeScreen() {
         <PopularBrands />
       </ScrollView>
 
-      <BottomBar activeTab={activeTab} setActiveTab={setActiveTab}/>
+      <BottomBar activeTab="home" />
     </View>
   );
 }

@@ -1,14 +1,23 @@
 import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
-export default function BottomBar({ activeTab, setActiveTab }) {
+export default function BottomBar({ activeTab }) {
+  
+
   const tabs = [
-    { id: 'home', icon: 'home', label: 'Ana Sayfa' },
-    { id: 'favorites', icon: 'heart', label: 'Favoriler' },
-    { id: 'cart', icon: 'cart', label: 'Sepet' },
-    { id: 'profile', icon: 'person', label: 'Profil' },
+    { id: 'home', icon: 'home', label: 'Ana Sayfa', screen: 'Home' },
+    { id: 'favorites', icon: 'heart', label: 'Favoriler', screen: 'Favorites' },
+    { id: 'cart', icon: 'cart', label: 'Sepet', screen: 'Cart' },
+    { id: 'profile', icon: 'person', label: 'Profil', screen: 'Profile' },
   ];
+  const navigation = useNavigation();
+
+
+  const handleTabPress = (tab) => {
+    navigation.navigate(tab.screen);
+  };
 
   return (
     <View style={styles.container}>
@@ -16,7 +25,7 @@ export default function BottomBar({ activeTab, setActiveTab }) {
         <TouchableOpacity
           key={tab.id}
           style={styles.tab}
-          onPress={() => setActiveTab(tab.id)}
+          onPress={() => handleTabPress(tab)}
         >
           <Ionicons
             name={tab.icon}

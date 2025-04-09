@@ -11,6 +11,8 @@ import ProductListScreen from './screens/ProductListScreen';
 import ProductDetailScreen from './screens/ProductDetailScreen';
 import CartScreen from './screens/CartScreen';
 import CartContextProvider from './store/CartContext';
+import BottomBar from './components/BottomBar';
+import ProfileScreen from './screens/ProfileScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,12 +28,27 @@ function NormalStack() {
 function AfterAuthenticatedStack() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }} >
-    <Stack.Screen name="Home" component={HomeScreen} />
-    <Stack.Screen name="ProductList" component={ProductListScreen} />
-    <Stack.Screen name="ProductDetail" component={ProductDetailScreen} />
-    <Stack.Screen name="Cart" component={CartScreen} />
-  </Stack.Navigator>
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="ProductList" component={ProductListScreen} />
+      <Stack.Screen name="ProductDetail" component={ProductDetailScreen} />
+      <Stack.Screen name="Cart" component={CartScreen} />
+      <Stack.Screen name="Profile" component={ProfileScreen} />
+    </Stack.Navigator>
   )
+}
+
+function BottomTabNavigator() {
+  return (
+    <>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="ProductList" component={ProductListScreen} />
+        <Stack.Screen name="ProductDetail" component={ProductDetailScreen} />
+        <Stack.Screen name="Profile" component={ProfileScreen} />
+      </Stack.Navigator>
+      <BottomBar /> 
+    </>
+  );
 }
 
 function Navigation() {

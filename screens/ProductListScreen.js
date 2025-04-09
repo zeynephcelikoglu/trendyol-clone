@@ -3,6 +3,7 @@ import { View, Text, FlatList, ActivityIndicator, StyleSheet } from 'react-nativ
 import SearchBar from '../components/SearchBar';
 import ProductCard from '../components/ProductCard';
 import { useNavigation } from '@react-navigation/native';
+import BottomBar from '../components/BottomBar';
 
 export default function ProductListScreen() {
   const [products, setProducts] = useState([]);
@@ -51,6 +52,7 @@ export default function ProductListScreen() {
           />
         )}
       />
+      <BottomBar activeTab="ProductList" />
     </View>
   );
 }
