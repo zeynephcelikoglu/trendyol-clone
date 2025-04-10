@@ -22,9 +22,6 @@ Bu proje, Trendyol mobil uygulamasının temel işlevselliklerini taklit eden bi
 - [FakeStoreAPI](https://fakestoreapi.com/) (Test verisi olarak)
 
 ## 📸 Ekran Görüntüleri
-
-| Ana Sayfa | Ürün Detay | Sepet | Profil |
-|----------|------------|-------|--------|
 <img width="418" alt="login" src="https://github.com/user-attachments/assets/984e2225-40c6-4abd-b01c-bb3453eea044" />
 <img width="462" alt="signup" src="https://github.com/user-attachments/assets/847fb1c0-76a8-4fc9-a07b-77705b4270f6" />
 <img width="462" alt="homepage" src="https://github.com/user-attachments/assets/e9e82e86-2f79-4aba-b0bf-9f5889309fc7" />
