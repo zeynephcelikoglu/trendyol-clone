@@ -35,4 +35,3 @@ const styles = StyleSheet.create({
     paddingBottom: 60, 
   }
 });
-

@@ -1,4 +1,3 @@
-import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from './screens/LoginScreen';
@@ -13,6 +12,7 @@ import CartScreen from './screens/CartScreen';
 import CartContextProvider from './store/CartContext';
 import BottomBar from './components/BottomBar';
 import ProfileScreen from './screens/ProfileScreen';
+import { NativeWindStyleSheet } from "nativewind";
 
 const Stack = createNativeStackNavigator();
 
@@ -71,4 +71,4 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({});
+
