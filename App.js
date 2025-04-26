@@ -12,7 +12,7 @@ import CartScreen from './screens/CartScreen';
 import CartContextProvider from './store/CartContext';
 import BottomBar from './components/BottomBar';
 import ProfileScreen from './screens/ProfileScreen';
-import { NativeWindStyleSheet } from "nativewind";
+
 
 const Stack = createNativeStackNavigator();
 
